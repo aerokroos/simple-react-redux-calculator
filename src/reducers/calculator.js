@@ -1,15 +1,23 @@
 const initialState = {
   currentResult: " ",
   total: "0",
+  syntaxError: false,
 };
 
 const calculator = (state = initialState, action) => {
   switch (action.type) {
     // When element is pressed
     case "ELEMENT":
-      return Object.assign({}, state, {
-        currentResult: state.currentResult + action.element,
-      });
+      if (!state.syntaxError) {
+        return Object.assign({}, state, {
+          currentResult: state.currentResult + action.element,
+        });
+      } else {
+        return Object.assign({}, state, {
+          currentResult: "",
+          syntaxError: false,
+        });
+      }
 
     // When C sign is pressed
     case "C":
@@ -40,11 +48,13 @@ const calculator = (state = initialState, action) => {
       ) {
         return Object.assign({}, state, {
           currentResult: "Syntax Error",
+          syntaxError: true,
         });
       } else {
         return Object.assign({}, state, {
           total: eval(state.currentResult),
           currentResult: "",
+          syntaxError: false,
         });
       }
 
