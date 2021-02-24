@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/NumberBtn.css";
+import "../assets/Btn.css";
 
 const NumberBtn = ({ number, click }) => {
   return (

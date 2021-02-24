@@ -1,5 +1,5 @@
 const initialState = {
-  currentResult: "",
+  currentResult: " ",
   total: "0",
 };
 
@@ -33,6 +33,13 @@ const calculator = (state = initialState, action) => {
       } else if (state.currentResult.includes("++")) {
         return Object.assign({}, state, {
           currentResult: state.currentResult.replace("++", "+"),
+        });
+      } else if (
+        state.currentResult[0] === "/" ||
+        state.currentResult[0] === "*"
+      ) {
+        return Object.assign({}, state, {
+          currentResult: "Syntax Error",
         });
       } else {
         return Object.assign({}, state, {
